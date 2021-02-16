@@ -92,9 +92,9 @@ void EthernetClass::begin(uint8_t *mac, IPAddress ip, IPAddress dns, IPAddress g
 	W5100.setGatewayIp(gateway._address.bytes);
 	W5100.setSubnetMask(subnet._address.bytes);
 #else
-	W5100.setIPAddress(ip._address);
-	W5100.setGatewayIp(gateway._address);
-	W5100.setSubnetMask(subnet._address);
+	W5100.setIPAddress((const uint8_t *)&ip);
+	W5100.setGatewayIp((const uint8_t *)&gateway);
+	W5100.setSubnetMask((const uint8_t *)&subnet);
 #endif
 	SPI.endTransaction();
 	_dnsServerAddress = dns;
